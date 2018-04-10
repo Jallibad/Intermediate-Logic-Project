@@ -1,29 +1,43 @@
 package main;
 
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultEdge;
+import fitch.FitchProof;
+import javafx.scene.layout.Pane;
+import truthtree.TruthTree;
 
 public abstract class LogicSystem
 {
-	public static void main(String[] args)
+	protected static Set<Class<? extends LogicSystem>> classes = new HashSet<Class<? extends LogicSystem>>();
+	static
 	{
-		
+		classes.add(TruthTree.class);
+		classes.add(FitchProof.class);
 	}
 	
-	private static Graph<String, DefaultEdge> allConversions;
+	//private static Graph<Class<LogicSystem>, Conversion<LogicSystem, ? extends LogicSystem>> allConversions;
+	private static Map<Class<LogicSystem>, Conversion<LogicSystem, LogicSystem>> allConversions;
 	
-	public <T extends LogicSystem> T convert(Class<T> clazz)
+	public abstract String name();
+	
+	public <T extends LogicSystem> Optional<T> convert(Class<T> clazz)
 	{
-		Conversion<LogicSystem, T> t = (l -> this);
+		//Conversion<LogicSystem, T> t = ;
+		//ShortestPathAlgorithm<Class<LogicSystem>, Conversion<LogicSystem, ? extends LogicSystem>> t;
+		//t.getPath(this.getClass(), clazz);
+		
+		return Optional.empty();
 	}
 	
 	Set<Class<? extends LogicSystem>> conversions = new HashSet<Class<? extends LogicSystem>>();
 	
 	public Set<Class<? extends LogicSystem>> conversions()
 	{
-		
+		return null;
 	}
+	
+	public abstract Pane display();
 }
